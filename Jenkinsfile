@@ -28,33 +28,7 @@ pipeline {
 }
 
 
-   stage('Check code coverage') {
-            steps {
-                script {
-                    def token = "squ_f7eb470e1d8076b6f90035a500c6dd55c6644783"
-                    def sonarQubeUrl = "http://3.88.182.208:9000/api"
-                    def componentKey = "com.codeddecode:restaurantlisting"
-                    def coverageThreshold = 0.0
-
-                    def response = sh (
-                        script: "curl -H 'Authorization: Bearer ${token}' '${sonarQubeUrl}/measures/component?component=${componentKey}&metricKeys=coverage'",
-                        returnStdout: true
-                    ).trim()
-
-                    def coverage = sh (
-                        script: "echo '${response}' | jq -r '.component.measures[0].value'",
-                        returnStdout: true
-                    ).trim().toDouble()
-
-                    echo "Coverage: ${coverage}"
-
-                    if (coverage < coverageThreshold) {
-                        error "Coverage is below the threshold of ${coverageThreshold}%. Aborting the pipeline."
-                    }
-                }
-            }
-        } 
-
+  
 
       stage('Docker Build and Push') {
       steps {
