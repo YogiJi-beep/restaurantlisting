@@ -3,6 +3,7 @@ package com.codedecode.restaurentlisting.service;
 import com.codedecode.restaurentlisting.dto.RestaurentDTO;
 import com.codedecode.restaurentlisting.entity.Restaurant;
 import com.codedecode.restaurentlisting.entity.Utility;
+import com.codedecode.restaurentlisting.exception.RestaurantNotFoundException;
 import com.codedecode.restaurentlisting.repo.RestaurentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,9 @@ public class RestaurentService {
             {
                 return new ResponseEntity<>(utility.toDto(resturent.get()), HttpStatus.OK);
             }
+        if (resturent.isEmpty() ) {
+            throw new RestaurantNotFoundException("Restaurant with ID " + id + " not found.");
+        }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 }

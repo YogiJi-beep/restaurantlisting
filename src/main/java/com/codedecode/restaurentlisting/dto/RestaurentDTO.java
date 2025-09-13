@@ -23,7 +23,15 @@ int id;
       String city;
        String address;
        String restaurentDescription;
-//  public   RestaurentDTO(){}
+
+    public RestaurentDTO(int i, String s, String s1, String s2, String s3) {
+    }
+
+    public RestaurentDTO() {
+
+    }
+
+    //  public   RestaurentDTO(){}
     public int getId() {
         return id;
     }

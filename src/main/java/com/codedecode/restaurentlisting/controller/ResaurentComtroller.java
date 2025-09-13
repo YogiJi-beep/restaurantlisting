@@ -32,6 +32,7 @@ public class ResaurentComtroller {
 @GetMapping("fetchById/{id}")
     public ResponseEntity<RestaurentDTO> fetchResturentById(@PathVariable Integer id)
     {
+
         return restaurentService.fetchResturentById(id);
 
 
